@@ -63,6 +63,12 @@ class SetupActivity : AppCompatActivity() {
             button = R.string.setup_batt_btn
         ) { requestBatteryExemption() }
 
+        item(
+            R.string.setup_upd_perm_t, R.string.setup_upd_perm_b,
+            ok = packageManager.canRequestPackageInstalls(),
+            button = R.string.setup_fs_btn
+        ) { startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:$packageName"))) }
+
         item(R.string.setup_vol_t, R.string.setup_vol_b)
         item(R.string.setup_ref_t, R.string.setup_ref_b)
         item(R.string.setup_test_t, R.string.setup_test_b)

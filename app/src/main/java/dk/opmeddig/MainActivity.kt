@@ -147,6 +147,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Opdateringer: tjek i baggrunden; knappen vises, hvis der ligger en nyere version
+        Updater.schedule(this)
+        findViewById<Button>(R.id.updateBtn).setOnClickListener {
+            if (!packageManager.canRequestPackageInstalls()) {
+                toast(getString(R.string.upd_need_permission))
+                startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:$packageName")))
+            } else {
+                it.isEnabled = false
+                (it as Button).text = getString(R.string.upd_downloading)
+                Thread {
+                    val started = try { Updater.checkAndInstall(this) } catch (e: Exception) { false }
+                    runOnUiThread { if (!started) { it.isEnabled = true; refresh() } }
+                }.start()
+            }
+        }
+
         if (!SetupActivity.isDone(this)) startActivity(Intent(this, SetupActivity::class.java))
         else if (Build.VERSION.SDK_INT >= 33) askNotif.launch(Manifest.permission.POST_NOTIFICATIONS)
         refresh()
@@ -189,6 +205,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun refresh() {
         timeText.text = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+
+        val latest = Prefs.latestTag(this)
+        val updateBtn = findViewById<Button>(R.id.updateBtn)
+        val hasUpdate = latest.isNotEmpty() && Updater.isNewer(latest, Updater.installedVersion(this))
+        updateBtn.visibility = if (hasUpdate) android.view.View.VISIBLE else android.view.View.GONE
+        if (hasUpdate && updateBtn.isEnabled) updateBtn.text = getString(R.string.upd_button, latest.trimStart('v'))
 
         val accent = ContextCompat.getColor(this, R.color.accent)
         val fg = ContextCompat.getColor(this, R.color.fg)

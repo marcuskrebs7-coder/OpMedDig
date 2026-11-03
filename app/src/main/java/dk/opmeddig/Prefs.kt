@@ -21,4 +21,11 @@ object Prefs {
     /** Ugedage som bitmaske: bit 0 = mandag … bit 6 = søndag. Standard: alle dage. */
     fun days(c: Context) = p(c).getInt("days", 0b1111111)
     fun setDays(c: Context, days: Int) = p(c).edit().putInt("days", days).apply()
+
+    fun ringing(c: Context) = p(c).getBoolean("ringing", false)
+    fun setRinging(c: Context, v: Boolean) = p(c).edit().putBoolean("ringing", v).commit()
+
+    /** Seneste version fundet på GitHub, fx "v1.4" */
+    fun latestTag(c: Context) = p(c).getString("latestTag", "") ?: ""
+    fun setLatestTag(c: Context, t: String) = p(c).edit().putString("latestTag", t).apply()
 }

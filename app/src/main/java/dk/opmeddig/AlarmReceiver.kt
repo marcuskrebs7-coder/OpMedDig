@@ -13,6 +13,9 @@ class AlarmReceiver : BroadcastReceiver() {
 /** Sætter alarmen igen efter genstart af telefonen. */
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
-        if (i.action == Intent.ACTION_BOOT_COMPLETED) Scheduler.scheduleNext(c)
+        if (i.action == Intent.ACTION_BOOT_COMPLETED || i.action == Intent.ACTION_MY_PACKAGE_REPLACED) {
+            Prefs.setRinging(c, false)
+            Scheduler.scheduleNext(c)
+        }
     }
 }

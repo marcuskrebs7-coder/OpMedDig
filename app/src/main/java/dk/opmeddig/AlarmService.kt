@@ -33,6 +33,7 @@ class AlarmService : Service() {
             return START_NOT_STICKY
         }
         if (player != null) return START_STICKY
+        Prefs.setRinging(this, true)
 
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(
@@ -110,6 +111,7 @@ class AlarmService : Service() {
     }
 
     override fun onDestroy() {
+        Prefs.setRinging(this, false)
         handler.removeCallbacksAndMessages(null)
         player?.run { stop(); release() }
         player = null

@@ -65,6 +65,16 @@
     <string name="setup_nosnooze_b">The alarm only stops when the problems are solved and the photo is accepted. The back button and volume buttons do nothing on the alarm screen. Locking the phone is fine. Turning the phone off or uninstalling the app will of course stop it.</string>
     <string name="setup_upd_t">Updates</string>
     <string name="setup_upd_b">The app is not from the Play Store. Play Protect may warn you during install, choose \"Install anyway\". New versions are installed manually on top of the old one.</string>
+    <string name="setup_upd_perm_t">Allow automatic updates</string>
+    <string name="setup_upd_perm_b">Lets the app install new versions from GitHub itself. On Android 12 and newer it then updates on its own; otherwise you get an Update button.</string>
     <string name="setup_done_ok">Done</string>
+
+    <!-- Updates -->
+    <string name="upd_channel">Updates</string>
+    <string name="upd_title">New version of Op Med Dig</string>
+    <string name="upd_text">Tap to install the update</string>
+    <string name="upd_button">Update to version %1$s</string>
+    <string name="upd_downloading">Downloading update…</string>
+    <string name="upd_need_permission">Allow Op Med Dig to install updates, then tap again</string>
     <string name="setup_go">Got it, let\'s go</string>
 </resources>

@@ -63,6 +63,16 @@
     <string name="setup_nosnooze_b">Alarmen stopper kun, når regnestykkerne er løst og billedet er godkendt. Tilbage-knappen og lydknapperne virker ikke på alarmskærmen. Det er fint at låse telefonen. Slukker man telefonen eller afinstallerer appen, stopper alarmen selvfølgelig.</string>
     <string name="setup_upd_t">Opdateringer</string>
     <string name="setup_upd_b">Appen kommer ikke fra Play Butik. Play Protect kan advare ved installation, vælg \"Installer alligevel\". Nye versioner installeres manuelt oven på den gamle.</string>
+    <string name="setup_upd_perm_t">Tillad automatiske opdateringer</string>
+    <string name="setup_upd_perm_b">Lader appen selv installere nye versioner fra GitHub. På Android 12 og nyere opdaterer den så af sig selv, ellers får du en Opdater-knap.</string>
     <string name="setup_done_ok">Klaret</string>
+
+    <!-- Opdateringer -->
+    <string name="upd_channel">Opdateringer</string>
+    <string name="upd_title">Ny version af Op Med Dig</string>
+    <string name="upd_text">Tryk for at installere opdateringen</string>
+    <string name="upd_button">Opdater til version %1$s</string>
+    <string name="upd_downloading">Henter opdatering…</string>
+    <string name="upd_need_permission">Tillad Op Med Dig at installere opdateringer, og tryk igen</string>
     <string name="setup_go">Forstået, kom i gang</string>
 </resources>

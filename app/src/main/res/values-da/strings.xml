@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Forside -->
+    <string name="header">OP MED DIG · VÆKKEUR</string>
+    <string name="label_time">Vækketid</string>
+    <string name="label_days">Dage</string>
+    <string name="label_count">Regnestykker</string>
+    <string name="label_ref">Referencebillede (fx kaffemaskinen eller køleskabet)</string>
+    <string name="btn_ref">Tag referencebillede</string>
+    <string name="btn_arm">Sæt alarm</string>
+    <string name="btn_disarm">Slå alarm fra</string>
+    <string name="btn_test">Test alarmen om 1 minut</string>
+    <string name="btn_setup">Vigtigt at vide / tjekliste</string>
+    <string name="note">Alarmen ringer på de valgte dage, også når telefonen er låst. Den slukker først, når regnestykkerne er løst, og du har taget et billede af samme sted som referencebilledet.</string>
+    <string name="label_language">Sprog</string>
+    <string-array name="day_letters">
+        <item>M</item><item>T</item><item>O</item><item>T</item><item>F</item><item>L</item><item>S</item>
+    </string-array>
+    <string name="status_armed">Alarmen er sat. Ringer &lt;b&gt;&lt;font color=\'%1$s\'&gt;%2$s&lt;/font&gt;&lt;/b&gt;</string>
+    <string name="next_format">EEEE \'kl.\' HH:mm</string>
+    <string name="status_need_ref">Tag et referencebillede, og sæt så alarmen.</string>
+    <string name="status_none">Ingen alarm sat.</string>
+    <string name="status_test">Testalarm om 1 minut. Lås gerne telefonen imens.</string>
+    <string name="toast_one_day">Vælg mindst én dag</string>
+    <string name="toast_need_ref">Tag et referencebillede først</string>
+    <string name="toast_fullscreen">Tillad fuldskærmsnotifikationer for Op Med Dig, og prøv igen</string>
+
+    <!-- Alarmskærm -->
+    <string name="wake_up">STÅ OP!</string>
+    <string name="answer_hint">Svar</string>
+    <string name="btn_answer">Svar</string>
+    <string name="progress">Regnestykke %1$d af %2$d</string>
+    <string name="wrong">Forkert. Her er et nyt stykke.</string>
+    <string name="last_step">Sidste trin</string>
+    <string name="photo_task">Gå hen til stedet på referencebilledet, og tag et billede</string>
+    <string name="btn_photo">Tag billede</string>
+    <string name="no_photo">Intet billede. Prøv igen.</string>
+    <string name="photo_mismatch">Det ligner ikke referencebilledet (%1$d %%). Gå derhen, og prøv igen.</string>
+    <string name="good_morning">Godmorgen! Du er ude af sengen.</string>
+    <string name="notif_channel">Alarm</string>
+    <string name="notif_title">Stå op!</string>
+    <string name="notif_text">Tryk for at slukke alarmen</string>
+
+    <!-- Tjekliste -->
+    <string name="setup_title">Før du starter</string>
+    <string name="setup_intro">Gå listen igennem én gang. Punkter med en knap skal du ordne, ellers kan alarmen ikke ringe ordentligt.</string>
+    <string name="setup_notif_t">Tillad notifikationer</string>
+    <string name="setup_notif_b">Alarmen bruger en notifikation til at vække skærmen.</string>
+    <string name="setup_notif_btn">Tillad</string>
+    <string name="setup_fs_t">Tillad fuldskærmsalarm</string>
+    <string name="setup_fs_b">Uden den kommer alarmskærmen ikke frem, når telefonen er låst.</string>
+    <string name="setup_fs_btn">Åbn indstilling</string>
+    <string name="setup_batt_t">Slå batterioptimering fra</string>
+    <string name="setup_batt_b">Mange telefoner (især Samsung, Xiaomi, OnePlus og Huawei) lukker apps for at spare strøm. Så ringer alarmen måske ikke om morgenen.</string>
+    <string name="setup_batt_btn">Slå fra</string>
+    <string name="setup_vol_t">Alarmlyden</string>
+    <string name="setup_vol_b">Appen skruer selv alarmlyden helt op og låser den, mens den ringer. Den virker også i lydløs, men ikke hvis telefonen er slukket eller løbet tør for strøm. Sæt den til opladning om aftenen.</string>
+    <string name="setup_ref_t">Vælg et godt referencested</string>
+    <string name="setup_ref_b">Tag referencebilledet af noget, der står fast og er let at genkende, fx kaffemaskinen eller køleskabet. Undgå steder, der ser meget forskellige ud med lyset tændt og slukket. Tag billedet i samme lys, som der er om morgenen.</string>
+    <string name="setup_test_t">Lav en test</string>
+    <string name="setup_test_b">Tryk \"Test alarmen om 1 minut\", lås telefonen og vent. Tjek at den ringer, og at billedet bliver godkendt.</string>
+    <string name="setup_nosnooze_t">Ingen snooze, ingen genvej</string>
+    <string name="setup_nosnooze_b">Alarmen stopper kun, når regnestykkerne er løst og billedet er godkendt. Tilbage-knappen og lydknapperne virker ikke på alarmskærmen. Det er fint at låse telefonen. Slukker man telefonen eller afinstallerer appen, stopper alarmen selvfølgelig.</string>
+    <string name="setup_upd_t">Opdateringer</string>
+    <string name="setup_upd_b">Appen kommer ikke fra Play Butik. Play Protect kan advare ved installation, vælg \"Installer alligevel\". Nye versioner installeres manuelt oven på den gamle.</string>
+    <string name="setup_done_ok">Klaret</string>
+    <string name="setup_go">Forstået, kom i gang</string>
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Op Med Dig</string>
+
+    <!-- Main screen -->
+    <string name="header">OP MED DIG · ALARM CLOCK</string>
+    <string name="label_time">Wake-up time</string>
+    <string name="label_days">Days</string>
+    <string name="label_count">Math problems</string>
+    <string name="label_ref">Reference photo (e.g. the coffee machine or the fridge)</string>
+    <string name="btn_ref">Take reference photo</string>
+    <string name="btn_arm">Set alarm</string>
+    <string name="btn_disarm">Turn alarm off</string>
+    <string name="btn_test">Test the alarm in 1 minute</string>
+    <string name="btn_setup">Good to know / checklist</string>
+    <string name="note">The alarm rings on the chosen days, even when the phone is locked. It only stops once the math problems are solved and you have taken a photo of the same spot as the reference photo.</string>
+    <string name="label_language">Language</string>
+    <string-array name="day_letters">
+        <item>M</item><item>T</item><item>W</item><item>T</item><item>F</item><item>S</item><item>S</item>
+    </string-array>
+    <string name="status_armed">Alarm is set. Rings &lt;b&gt;&lt;font color=\'%1$s\'&gt;%2$s&lt;/font&gt;&lt;/b&gt;</string>
+    <string name="next_format">EEEE \'at\' HH:mm</string>
+    <string name="status_need_ref">Take a reference photo, then set the alarm.</string>
+    <string name="status_none">No alarm set.</string>
+    <string name="status_test">Test alarm in 1 minute. Feel free to lock the phone.</string>
+    <string name="toast_one_day">Pick at least one day</string>
+    <string name="toast_need_ref">Take a reference photo first</string>
+    <string name="toast_fullscreen">Allow full-screen notifications for Op Med Dig, then try again</string>
+
+    <!-- Alarm screen -->
+    <string name="wake_up">WAKE UP!</string>
+    <string name="answer_hint">Answer</string>
+    <string name="btn_answer">Answer</string>
+    <string name="progress">Problem %1$d of %2$d</string>
+    <string name="wrong">Wrong. Here is a new one.</string>
+    <string name="last_step">Last step</string>
+    <string name="photo_task">Go to the spot in the reference photo and take a picture</string>
+    <string name="btn_photo">Take photo</string>
+    <string name="no_photo">No photo. Try again.</string>
+    <string name="photo_mismatch">That doesn\'t look like the reference photo (%1$d %%). Go there and try again.</string>
+    <string name="good_morning">Good morning! You\'re out of bed.</string>
+    <string name="notif_channel">Alarm</string>
+    <string name="notif_title">Wake up!</string>
+    <string name="notif_text">Tap to turn off the alarm</string>
+
+    <!-- Setup checklist -->
+    <string name="setup_title">Before you start</string>
+    <string name="setup_intro">Go through the list once. Items with a button need fixing, otherwise the alarm can\'t ring properly.</string>
+    <string name="setup_notif_t">Allow notifications</string>
+    <string name="setup_notif_b">The alarm uses a notification to wake the screen.</string>
+    <string name="setup_notif_btn">Allow</string>
+    <string name="setup_fs_t">Allow full-screen alarm</string>
+    <string name="setup_fs_b">Without it, the alarm screen won\'t appear when the phone is locked.</string>
+    <string name="setup_fs_btn">Open setting</string>
+    <string name="setup_batt_t">Turn off battery optimisation</string>
+    <string name="setup_batt_b">Many phones (especially Samsung, Xiaomi, OnePlus and Huawei) close apps to save power. Then the alarm may not ring in the morning.</string>
+    <string name="setup_batt_btn">Turn off</string>
+    <string name="setup_vol_t">Alarm volume</string>
+    <string name="setup_vol_b">The app turns the alarm volume all the way up and locks it while ringing. It works in silent mode too, but not if the phone is off or out of battery. Charge it overnight.</string>
+    <string name="setup_ref_t">Pick a good reference spot</string>
+    <string name="setup_ref_b">Photograph something fixed and easy to recognise, like the coffee machine or the fridge. Avoid places that look very different with the lights on and off. Take the photo in the same light as in the morning.</string>
+    <string name="setup_test_t">Do a test</string>
+    <string name="setup_test_b">Tap \"Test the alarm in 1 minute\", lock the phone and wait. Check that it rings and that the photo is accepted.</string>
+    <string name="setup_nosnooze_t">No snooze, no shortcut</string>
+    <string name="setup_nosnooze_b">The alarm only stops when the problems are solved and the photo is accepted. The back button and volume buttons do nothing on the alarm screen. Locking the phone is fine. Turning the phone off or uninstalling the app will of course stop it.</string>
+    <string name="setup_upd_t">Updates</string>
+    <string name="setup_upd_b">The app is not from the Play Store. Play Protect may warn you during install, choose \"Install anyway\". New versions are installed manually on top of the old one.</string>
+    <string name="setup_done_ok">Done</string>
+    <string name="setup_go">Got it, let\'s go</string>
+</resources>

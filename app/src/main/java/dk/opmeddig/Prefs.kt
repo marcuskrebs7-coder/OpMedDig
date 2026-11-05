@@ -22,6 +22,10 @@ object Prefs {
     fun days(c: Context) = p(c).getInt("days", 0b1111111)
     fun setDays(c: Context, days: Int) = p(c).edit().putInt("days", days).apply()
 
+    /** Opgavetyper som bitmaske (se ChallengeType). Standard: alle. */
+    fun challenges(c: Context) = p(c).getInt("challenges", ChallengeType.ALL)
+    fun setChallenges(c: Context, v: Int) = p(c).edit().putInt("challenges", v).apply()
+
     fun ringing(c: Context) = p(c).getBoolean("ringing", false)
     fun setRinging(c: Context, v: Boolean) = p(c).edit().putBoolean("ringing", v).commit()
 

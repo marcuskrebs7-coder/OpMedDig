@@ -5,10 +5,11 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -18,20 +19,22 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.random.Random
 
-/** Skærmen der vises, når alarmen ringer: først regnestykker, så et billede af referencestedet. */
+/**
+ * Skærmen der vises, når alarmen ringer: et antal opgaver (regning, prikker, vendespil, skriv),
+ * derefter sænkes lyden til 50 %, og til sidst skal der tages et billede af referencestedet.
+ */
 class RingActivity : AppCompatActivity() {
+    private lateinit var taskArea: FrameLayout
     private lateinit var question: TextView
-    private lateinit var answer: EditText
     private lateinit var error: TextView
     private lateinit var progress: TextView
     private lateinit var okBtn: Button
     private lateinit var dots: LinearLayout
     private var flash: ValueAnimator? = null
     private var solved = 0
-    private var expected = 0
     private var photoPhase = false
+    private var plan: List<ChallengeType> = emptyList()
 
     private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bmp ->
         val ref = PhotoMatch.loadRef(this)
@@ -55,8 +58,8 @@ class RingActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
         setContentView(R.layout.activity_ring)
+        taskArea = findViewById(R.id.taskArea)
         question = findViewById(R.id.question)
-        answer = findViewById(R.id.answer)
         error = findViewById(R.id.error)
         progress = findViewById(R.id.progress)
         okBtn = findViewById(R.id.okBtn)
@@ -82,15 +85,15 @@ class RingActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {}
         })
-
-        okBtn.setOnClickListener { if (photoPhase) takePhoto.launch(null) else check() }
-        answer.setOnEditorActionListener { _, _, _ -> check(); true }
+        okBtn.setOnClickListener { takePhoto.launch(null) }
 
         if (s != null) {
             solved = s.getInt("solved")
             photoPhase = s.getBoolean("photoPhase")
+            plan = s.getIntArray("plan")?.map { ChallengeType.values()[it] } ?: emptyList()
         }
-        if (photoPhase) startPhotoPhase() else newProblem()
+        if (plan.isEmpty()) plan = makePlan()
+        if (photoPhase) startPhotoPhase() else showTask()
     }
 
     override fun onDestroy() {
@@ -102,18 +105,28 @@ class RingActivity : AppCompatActivity() {
         super.onSaveInstanceState(out)
         out.putInt("solved", solved)
         out.putBoolean("photoPhase", photoPhase)
+        out.putIntArray("plan", plan.map { it.ordinal }.toIntArray())
     }
 
     /** Lydknapperne gør ingenting på alarmskærmen. */
-    override fun onKeyDown(keyCode: Int, event: android.view.KeyEvent?): Boolean =
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =
         when (keyCode) {
-            android.view.KeyEvent.KEYCODE_VOLUME_DOWN,
-            android.view.KeyEvent.KEYCODE_VOLUME_UP,
-            android.view.KeyEvent.KEYCODE_VOLUME_MUTE -> true
+            KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_VOLUME_MUTE -> true
             else -> super.onKeyDown(keyCode, event)
         }
 
-    private fun total() = Prefs.count(this)
+    /** Tilfældig rækkefølge af de valgte opgavetyper, helst ikke den samme to gange i træk. */
+    private fun makePlan(): List<ChallengeType> {
+        val types = ChallengeType.from(Prefs.challenges(this))
+        val out = mutableListOf<ChallengeType>()
+        repeat(Prefs.count(this)) {
+            val options = if (types.size > 1) types.filter { it != out.lastOrNull() } else types
+            out += options.random()
+        }
+        return out
+    }
+
+    private fun total() = plan.size
 
     private fun renderDots() {
         dots.removeAllViews()
@@ -132,36 +145,33 @@ class RingActivity : AppCompatActivity() {
         }
     }
 
-    private fun newProblem() {
-        val a = Random.nextInt(3, 13)
-        val b = Random.nextInt(6, 14)
-        val c = Random.nextInt(11, 61)
-        expected = a * b + c
-        question.text = "$a × $b + $c"
-        answer.setText("")
+    private fun showTask() {
+        error.text = ""
         progress.text = getString(R.string.progress, solved + 1, total())
         renderDots()
-    }
-
-    private fun check() {
-        if (answer.text.toString().trim().toIntOrNull() == expected) {
-            solved++
-            error.text = ""
-            if (solved >= total()) startPhotoPhase() else newProblem()
-        } else {
-            error.text = getString(R.string.wrong)
-            newProblem()
-        }
+        taskArea.removeAllViews()
+        taskArea.addView(
+            Challenges.build(plan[solved], this,
+                onDone = {
+                    solved++
+                    if (solved >= total()) startPhotoPhase() else showTask()
+                },
+                onWrong = { msg -> error.text = msg }
+            )
+        )
     }
 
     private fun startPhotoPhase() {
         photoPhase = true
+        // Opgaverne er klaret: lyden ned på 50 %
+        startService(Intent(this, AlarmService::class.java).setAction(AlarmService.ACTION_QUIET))
         renderDots()
-        answer.visibility = View.GONE
+        taskArea.removeAllViews()
+        error.text = ""
         progress.text = getString(R.string.last_step)
-        question.textSize = 22f
         question.text = getString(R.string.photo_task)
-        okBtn.text = getString(R.string.btn_photo)
+        question.visibility = View.VISIBLE
+        okBtn.visibility = View.VISIBLE
     }
 
     private fun finishAlarm() {

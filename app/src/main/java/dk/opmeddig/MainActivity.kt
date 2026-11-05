@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var armBtn: Button
     private lateinit var countBtns: Map<Int, Button>
     private lateinit var dayBtns: List<Button>
+    private lateinit var typeBtns: Map<ChallengeType, Button>
     private lateinit var langBtns: Map<String, Button>
 
     private var hour = 7
@@ -79,14 +80,25 @@ class MainActivity : AppCompatActivity() {
             }, hour, minute, true).show()
         }
 
-        countBtns = mapOf(
-            3 to findViewById(R.id.count3),
-            5 to findViewById(R.id.count5),
-            8 to findViewById(R.id.count8)
+        // Antal opgaver
+        val countRow = findViewById<LinearLayout>(R.id.counts)
+        countBtns = listOf(1, 2, 3, 5, 8).mapIndexed { i, n ->
+            n to toggleButton(n.toString(), countRow, i) { count = n; saveSettings(Prefs.armed(this)); refresh() }
+        }.toMap()
+
+        // Opgavetyper, to pr. række
+        val typeLabels = listOf(
+            ChallengeType.MATH to R.string.ch_name_math, ChallengeType.DOTS to R.string.ch_name_dots,
+            ChallengeType.MEMORY to R.string.ch_name_memory, ChallengeType.TYPING to R.string.ch_name_typing
         )
-        countBtns.forEach { (n, b) ->
-            b.setOnClickListener { count = n; saveSettings(Prefs.armed(this)); refresh() }
-        }
+        typeBtns = typeLabels.mapIndexed { i, (type, label) ->
+            val row = findViewById<LinearLayout>(if (i < 2) R.id.taskTypes1 else R.id.taskTypes2)
+            type to toggleButton(getString(label), row, i % 2) {
+                val now = Prefs.challenges(this) xor type.bit
+                if (now == 0) toast(getString(R.string.toast_one_task))
+                else { Prefs.setChallenges(this, now); refresh() }
+            }
+        }.toMap()
 
         // Ugedage, mandag først
         val daysRow = findViewById<LinearLayout>(R.id.days)
@@ -196,6 +208,18 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    /** Lille knap der deler rækken ligeligt med sine naboer. */
+    private fun toggleButton(label: String, row: LinearLayout, index: Int, onClick: () -> Unit): Button =
+        Button(this, null, 0, R.style.OMD_Button_Ghost).apply {
+            text = label
+            minWidth = 0; minimumWidth = 0
+            setPadding(0, 0, 0, 0)
+            layoutParams = LinearLayout.LayoutParams(0, (48 * resources.displayMetrics.density).toInt(), 1f)
+                .apply { if (index > 0) marginStart = (8 * resources.displayMetrics.density).toInt() }
+            setOnClickListener { onClick() }
+            row.addView(this)
+        }
+
     private fun locale(): Locale = resources.configuration.locales[0]
 
     private fun styleToggle(b: Button, on: Boolean, fg: Int) {
@@ -215,6 +239,8 @@ class MainActivity : AppCompatActivity() {
         val accent = ContextCompat.getColor(this, R.color.accent)
         val fg = ContextCompat.getColor(this, R.color.fg)
         countBtns.forEach { (n, b) -> styleToggle(b, n == count, fg) }
+        val types = Prefs.challenges(this)
+        typeBtns.forEach { (t, b) -> styleToggle(b, types and t.bit != 0, fg) }
 
         val days = Prefs.days(this)
         dayBtns.forEachIndexed { i, b -> styleToggle(b, days and (1 shl i) != 0, fg) }

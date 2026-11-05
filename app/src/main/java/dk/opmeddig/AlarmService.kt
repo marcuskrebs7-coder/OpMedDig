@@ -24,6 +24,7 @@ class AlarmService : Service() {
     private var vibrator: Vibrator? = null
     private val handler = Handler(Looper.getMainLooper())
     private var volume = 0.3f
+    private var quiet = false
 
     override fun onBind(i: Intent?) = null
 
@@ -31,6 +32,16 @@ class AlarmService : Service() {
         if (intent?.action == ACTION_STOP) {
             stopSelf()
             return START_NOT_STICKY
+        }
+        if (intent?.action == ACTION_QUIET) {
+            // Opgaverne er klaret: lyden ned på 50 % og ikke højere igen
+            quiet = true
+            val am = getSystemService(AudioManager::class.java)
+            val half = (am.getStreamMaxVolume(AudioManager.STREAM_ALARM) + 1) / 2
+            am.setStreamVolume(AudioManager.STREAM_ALARM, half, 0)
+            volume = 1f
+            player?.setVolume(1f, 1f)
+            return START_STICKY
         }
         if (player != null) return START_STICKY
         Prefs.setRinging(this, true)
@@ -82,8 +93,10 @@ class AlarmService : Service() {
         // Bliver højere hvert 3. sekund
         handler.post(object : Runnable {
             override fun run() {
-                volume = (volume + 0.07f).coerceAtMost(1f)
-                player?.setVolume(volume, volume)
+                if (!quiet) {
+                    volume = (volume + 0.07f).coerceAtMost(1f)
+                    player?.setVolume(volume, volume)
+                }
                 handler.postDelayed(this, 3000)
             }
         })
@@ -92,8 +105,10 @@ class AlarmService : Service() {
         val max = am.getStreamMaxVolume(AudioManager.STREAM_ALARM)
         handler.post(object : Runnable {
             override fun run() {
-                if (am.getStreamVolume(AudioManager.STREAM_ALARM) < max) {
-                    am.setStreamVolume(AudioManager.STREAM_ALARM, max, 0)
+                // Efter opgaverne låses den på 50 % i stedet for fuld
+                val target = if (quiet) (max + 1) / 2 else max
+                if (am.getStreamVolume(AudioManager.STREAM_ALARM) < target) {
+                    am.setStreamVolume(AudioManager.STREAM_ALARM, target, 0)
                 }
                 handler.postDelayed(this, 250)
             }
@@ -122,5 +137,6 @@ class AlarmService : Service() {
     companion object {
         const val CHANNEL = "alarm"
         const val ACTION_STOP = "dk.opmeddig.STOP"
+        const val ACTION_QUIET = "dk.opmeddig.QUIET"
     }
 }

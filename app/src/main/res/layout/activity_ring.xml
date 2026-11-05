@@ -1,97 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/alarm"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="20dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:letterSpacing="0.1"
-        android:text="@string/wake_up"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp" />
-
-    <TextView
-        android:id="@+id/ringClock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="monospace"
-        android:text="07:00"
-        android:textColor="#FFFFFF"
-        android:textSize="72sp"
-        android:textStyle="bold" />
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_task"
-        android:elevation="8dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="20dp">
 
-        <LinearLayout
-            android:id="@+id/dots"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.1"
+            android:text="@string/wake_up"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/progress"
+            android:id="@+id/ringClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="#5D6380"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="monospace"
-            android:gravity="center"
-            android:textColor="#161A2E"
-            android:textSize="34sp"
+            android:text="07:00"
+            android:textColor="#FFFFFF"
+            android:textSize="64sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/answer"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/bg_task_input"
-            android:fontFamily="monospace"
-            android:gravity="center"
-            android:hint="@string/answer_hint"
-            android:imeOptions="actionDone"
-            android:inputType="numberSigned"
-            android:textColor="#161A2E"
-            android:textColorHint="#9096B5"
-            android:textSize="26sp" />
-
-        <TextView
-            android:id="@+id/error"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:minHeight="20dp"
-            android:textColor="#C8102E"
-            android:textSize="14sp" />
+            android:background="@drawable/bg_task"
+            android:elevation="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <Button
-            android:id="@+id/okBtn"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/btn_answer" />
+            <LinearLayout
+                android:id="@+id/dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#5D6380"
+                android:textSize="14sp" />
+
+            <FrameLayout
+                android:id="@+id/taskArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#161A2E"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:minHeight="20dp"
+                android:textColor="#C8102E"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/okBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/btn_photo"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

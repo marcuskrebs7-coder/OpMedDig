@@ -6,14 +6,35 @@
     <string name="header">OP MED DIG · ALARM CLOCK</string>
     <string name="label_time">Wake-up time</string>
     <string name="label_days">Days</string>
-    <string name="label_count">Math problems</string>
+    <string name="label_count">Number of tasks</string>
+    <string name="label_tasks">Task types</string>
+    <string name="ch_name_math">Math</string>
+    <string name="ch_name_dots">Connect dots</string>
+    <string name="ch_name_memory">Match pictures</string>
+    <string name="ch_name_typing">Type text</string>
+    <string name="toast_one_task">Pick at least one task type</string>
+    <string name="ch_math">Solve the problem</string>
+    <string name="ch_dots">Tap the dots in order: 1, 2, 3 …</string>
+    <string name="ch_dots_wrong">Wrong dot. Start again from 1.</string>
+    <string name="ch_memory">Find the matching pairs</string>
+    <string name="ch_typing">Type the sentence exactly</string>
+    <string name="ch_typing_hint">Type here</string>
+    <string name="ch_typing_wrong">Not quite. Check the spelling.</string>
+    <string-array name="ch_phrases">
+        <item>I am awake and out of bed</item>
+        <item>Good morning, time to get up</item>
+        <item>Coffee first, then the world</item>
+        <item>No more snoozing today</item>
+        <item>My feet are on the floor</item>
+        <item>Today is going to be a good day</item>
+    </string-array>
     <string name="label_ref">Reference photo (e.g. the coffee machine or the fridge)</string>
     <string name="btn_ref">Take reference photo</string>
     <string name="btn_arm">Set alarm</string>
     <string name="btn_disarm">Turn alarm off</string>
     <string name="btn_test">Test the alarm in 1 minute</string>
     <string name="btn_setup">Good to know / checklist</string>
-    <string name="note">The alarm rings on the chosen days, even when the phone is locked. It only stops once the math problems are solved and you have taken a photo of the same spot as the reference photo.</string>
+    <string name="note">The alarm rings on the chosen days, even when the phone is locked. It only stops once the tasks are done and you have taken a photo of the same spot as the reference photo.</string>
     <string name="label_language">Language</string>
     <string-array name="day_letters">
         <item>M</item><item>T</item><item>W</item><item>T</item><item>F</item><item>S</item><item>S</item>
@@ -31,7 +52,7 @@
     <string name="wake_up">WAKE UP!</string>
     <string name="answer_hint">Answer</string>
     <string name="btn_answer">Answer</string>
-    <string name="progress">Problem %1$d of %2$d</string>
+    <string name="progress">Task %1$d of %2$d</string>
     <string name="wrong">Wrong. Here is a new one.</string>
     <string name="last_step">Last step</string>
     <string name="photo_task">Go to the spot in the reference photo and take a picture</string>
@@ -62,7 +83,7 @@
     <string name="setup_test_t">Do a test</string>
     <string name="setup_test_b">Tap \"Test the alarm in 1 minute\", lock the phone and wait. Check that it rings and that the photo is accepted.</string>
     <string name="setup_nosnooze_t">No snooze, no shortcut</string>
-    <string name="setup_nosnooze_b">The alarm only stops when the problems are solved and the photo is accepted. The back button and volume buttons do nothing on the alarm screen. Locking the phone is fine. Turning the phone off or uninstalling the app will of course stop it.</string>
+    <string name="setup_nosnooze_b">The alarm only stops when the tasks are done and the photo is accepted. After the tasks the volume drops to 50 %. The back button and volume buttons do nothing on the alarm screen. Locking the phone is fine. Turning the phone off or uninstalling the app will of course stop it.</string>
     <string name="setup_upd_t">Updates</string>
     <string name="setup_upd_b">The app is not from the Play Store. Play Protect may warn you during install, choose \"Install anyway\". New versions are installed manually on top of the old one.</string>
     <string name="setup_upd_perm_t">Allow automatic updates</string>

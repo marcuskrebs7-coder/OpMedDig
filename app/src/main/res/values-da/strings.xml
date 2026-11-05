@@ -4,14 +4,35 @@
     <string name="header">OP MED DIG · VÆKKEUR</string>
     <string name="label_time">Vækketid</string>
     <string name="label_days">Dage</string>
-    <string name="label_count">Regnestykker</string>
+    <string name="label_count">Antal opgaver</string>
+    <string name="label_tasks">Opgavetyper</string>
+    <string name="ch_name_math">Regnestykke</string>
+    <string name="ch_name_dots">Forbind prikker</string>
+    <string name="ch_name_memory">Vendespil</string>
+    <string name="ch_name_typing">Skriv tekst</string>
+    <string name="toast_one_task">Vælg mindst én opgavetype</string>
+    <string name="ch_math">Løs regnestykket</string>
+    <string name="ch_dots">Tryk på prikkerne i rækkefølge: 1, 2, 3 …</string>
+    <string name="ch_dots_wrong">Forkert prik. Start forfra fra 1.</string>
+    <string name="ch_memory">Find de ens par</string>
+    <string name="ch_typing">Skriv sætningen præcis</string>
+    <string name="ch_typing_hint">Skriv her</string>
+    <string name="ch_typing_wrong">Ikke helt. Tjek stavningen.</string>
+    <string-array name="ch_phrases">
+        <item>Jeg er vågen og ude af sengen</item>
+        <item>Godmorgen, nu er det tid til at stå op</item>
+        <item>Først kaffe, så resten af dagen</item>
+        <item>Ingen snooze i dag</item>
+        <item>Mine fødder står på gulvet</item>
+        <item>I dag bliver en god dag</item>
+    </string-array>
     <string name="label_ref">Referencebillede (fx kaffemaskinen eller køleskabet)</string>
     <string name="btn_ref">Tag referencebillede</string>
     <string name="btn_arm">Sæt alarm</string>
     <string name="btn_disarm">Slå alarm fra</string>
     <string name="btn_test">Test alarmen om 1 minut</string>
     <string name="btn_setup">Vigtigt at vide / tjekliste</string>
-    <string name="note">Alarmen ringer på de valgte dage, også når telefonen er låst. Den slukker først, når regnestykkerne er løst, og du har taget et billede af samme sted som referencebilledet.</string>
+    <string name="note">Alarmen ringer på de valgte dage, også når telefonen er låst. Den slukker først, når opgaverne er klaret, og du har taget et billede af samme sted som referencebilledet.</string>
     <string name="label_language">Sprog</string>
     <string-array name="day_letters">
         <item>M</item><item>T</item><item>O</item><item>T</item><item>F</item><item>L</item><item>S</item>
@@ -29,7 +50,7 @@
     <string name="wake_up">STÅ OP!</string>
     <string name="answer_hint">Svar</string>
     <string name="btn_answer">Svar</string>
-    <string name="progress">Regnestykke %1$d af %2$d</string>
+    <string name="progress">Opgave %1$d af %2$d</string>
     <string name="wrong">Forkert. Her er et nyt stykke.</string>
     <string name="last_step">Sidste trin</string>
     <string name="photo_task">Gå hen til stedet på referencebilledet, og tag et billede</string>
@@ -60,7 +81,7 @@
     <string name="setup_test_t">Lav en test</string>
     <string name="setup_test_b">Tryk \"Test alarmen om 1 minut\", lås telefonen og vent. Tjek at den ringer, og at billedet bliver godkendt.</string>
     <string name="setup_nosnooze_t">Ingen snooze, ingen genvej</string>
-    <string name="setup_nosnooze_b">Alarmen stopper kun, når regnestykkerne er løst og billedet er godkendt. Tilbage-knappen og lydknapperne virker ikke på alarmskærmen. Det er fint at låse telefonen. Slukker man telefonen eller afinstallerer appen, stopper alarmen selvfølgelig.</string>
+    <string name="setup_nosnooze_b">Alarmen stopper kun, når opgaverne er klaret og billedet er godkendt. Efter opgaverne falder lyden til 50 %. Tilbage-knappen og lydknapperne virker ikke på alarmskærmen. Det er fint at låse telefonen. Slukker man telefonen eller afinstallerer appen, stopper alarmen selvfølgelig.</string>
     <string name="setup_upd_t">Opdateringer</string>
     <string name="setup_upd_b">Appen kommer ikke fra Play Butik. Play Protect kan advare ved installation, vælg \"Installer alligevel\". Nye versioner installeres manuelt oven på den gamle.</string>
     <string name="setup_upd_perm_t">Tillad automatiske opdateringer</string>

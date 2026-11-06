@@ -35,6 +35,7 @@
         </activity>
 
         <activity android:name=".SetupActivity" android:exported="false" />
+        <activity android:name=".AlarmEditActivity" android:exported="false" />
 
         <activity
             android:name=".RingActivity"

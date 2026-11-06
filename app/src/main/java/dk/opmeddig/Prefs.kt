@@ -22,6 +22,11 @@ object Prefs {
     fun days(c: Context) = p(c).getInt("days", 0b1111111)
     fun setDays(c: Context, days: Int) = p(c).edit().putInt("days", days).apply()
 
+    /** Navnet på den alarm, der er planlagt som den næste (vises på alarmskærmen). */
+    fun pendingName(c: Context) = p(c).getString("pendingName", "") ?: ""
+    fun setPendingName(c: Context, v: String) = p(c).edit().putString("pendingName", v).apply()
+    fun setCount(c: Context, v: Int) = p(c).edit().putInt("count", v).apply()
+
     /** Opgavetyper som bitmaske (se ChallengeType). Standard: alle. */
     fun challenges(c: Context) = p(c).getInt("challenges", ChallengeType.ALL)
     fun setChallenges(c: Context, v: Int) = p(c).edit().putInt("challenges", v).apply()

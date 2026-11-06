@@ -28,13 +28,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="18dp"
             android:fontFamily="monospace"
             android:includeFontPadding="false"
             android:text="07:00:00"
             android:textColor="@color/fg"
             android:textSize="64sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/fg"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/updateBtn"
@@ -44,41 +52,32 @@
             android:visibility="gone"
             android:text="@string/upd_title" />
 
+        <!-- Alarmer -->
+        <TextView style="@style/OMD.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_alarms" />
+
+        <LinearLayout
+            android:id="@+id/alarmList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/addAlarmBtn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_add_alarm" />
+
+        <!-- Fælles for alle alarmer -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_card"
             android:orientation="vertical"
             android:padding="18dp">
 
-            <TextView style="@style/OMD.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_time" />
-
-            <TextView
-                android:id="@+id/timeText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_field"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="monospace"
-                android:paddingStart="16dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="10dp"
-                android:text="07:00"
-                android:textColor="@color/fg"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <TextView style="@style/OMD.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/label_days" />
-
-            <LinearLayout
-                android:id="@+id/days"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" />
-
-            <TextView style="@style/OMD.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/label_tasks" />
+            <TextView style="@style/OMD.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_tasks" />
 
             <LinearLayout
                 android:id="@+id/taskTypes1"
@@ -117,21 +116,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/btn_ref" />
-
-            <Button
-                android:id="@+id/armBtn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/btn_arm" />
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/fg"
-                android:textSize="16sp" />
         </LinearLayout>
 
         <Button

@@ -65,6 +65,9 @@ class RingActivity : AppCompatActivity() {
         okBtn = findViewById(R.id.okBtn)
         dots = findViewById(R.id.dots)
         findViewById<TextView>(R.id.ringClock).text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+        // Vis alarmens kaldenavn, fx "STÅ OP! · Arbejde"
+        val name = Prefs.pendingName(this)
+        if (name.isNotBlank()) findViewById<TextView>(R.id.wakeTitle).text = getString(R.string.wake_up) + " · " + name
 
         // Baggrunden blinker mellem rød og mørk
         val root = findViewById<View>(R.id.root)

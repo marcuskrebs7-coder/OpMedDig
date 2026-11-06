@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:letterSpacing="0.1"
+            android:id="@+id/wakeTitle"
+            android:gravity="center"
             android:text="@string/wake_up"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />

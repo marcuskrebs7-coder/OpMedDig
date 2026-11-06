@@ -98,4 +98,19 @@
     <string name="upd_downloading">Downloading update…</string>
     <string name="upd_need_permission">Allow Op Med Dig to install updates, then tap again</string>
     <string name="setup_go">Got it, let\'s go</string>
+    <!-- Multiple alarms -->
+    <string name="label_alarms">Alarms</string>
+    <string name="btn_add_alarm">+ Add alarm</string>
+    <string name="no_alarms">No alarms yet. Tap Add alarm.</string>
+    <string name="status_next">Next alarm: &lt;b&gt;&lt;font color=\'%1$s\'&gt;%2$s&lt;/font&gt;&lt;/b&gt;</string>
+    <string name="test_name">Test</string>
+    <string name="edit_new">New alarm</string>
+    <string name="edit_title">Edit alarm</string>
+    <string name="edit_name">Name (optional)</string>
+    <string name="edit_name_hint">e.g. Work, Gym, Weekend</string>
+    <string name="edit_save">Save</string>
+    <string name="edit_delete">Delete alarm</string>
+    <string name="days_all">Every day</string>
+    <string name="days_weekdays">Weekdays</string>
+    <string name="days_weekend">Weekend</string>
 </resources>

@@ -6,3 +6,5 @@ local.properties
 *.keystore
 *.jks
 desktop.ini
+keystore.properties
+Play-upload/

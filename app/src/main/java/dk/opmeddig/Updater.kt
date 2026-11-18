@@ -121,7 +121,7 @@ object Updater {
         )
         nm.notify(
             2, NotificationCompat.Builder(c, CHANNEL)
-                .setSmallIcon(R.drawable.ic_alarm)
+                .setSmallIcon(R.drawable.ic_stat_alarm)
                 .setContentTitle(c.getString(R.string.upd_title))
                 .setContentText(c.getString(R.string.upd_text))
                 .setContentIntent(pi)

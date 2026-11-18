@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kun GitHub-udgaven: selvopdatering fra GitHub-releases og direkte batteri-forespørgsel.
+     Begge er ikke tilladt / kræver særlig begrundelse i Google Play. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application>
+        <receiver android:name=".UpdateResultReceiver" android:exported="false" />
+    </application>
+</manifest>

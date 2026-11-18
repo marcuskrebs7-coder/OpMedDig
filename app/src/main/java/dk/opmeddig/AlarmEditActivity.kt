@@ -37,6 +37,7 @@ class AlarmEditActivity : AppCompatActivity() {
             setPadding(dp(20), dp(28), dp(20), dp(28))
         }
         setContentView(ScrollView(this).apply { setBackgroundColor(getColor(R.color.bg)); addView(list) })
+        applySystemBarInsets()
 
         list.addView(text(getString(if (existing == null) R.string.edit_new else R.string.edit_title), 26f, bold = true))
 
@@ -70,7 +71,7 @@ class AlarmEditActivity : AppCompatActivity() {
             setBackgroundResource(R.drawable.bg_field)
             setPadding(dp(16), dp(10), dp(16), dp(10))
             setOnClickListener {
-                TimePickerDialog(this@AlarmEditActivity, { _, h, m -> hour = h; minute = m; refresh() }, hour, minute, true).show()
+                TimePickerDialog(this@AlarmEditActivity, R.style.OMD_TimePicker, { _, h, m -> hour = h; minute = m; refresh() }, hour, minute, true).show()
             }
         }
         card.addView(timeText)

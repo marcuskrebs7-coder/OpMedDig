@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(s: Bundle?) {
         super.onCreate(s)
         setContentView(R.layout.activity_main)
+        applySystemBarInsets()
         clock = findViewById(R.id.clock)
         refImage = findViewById(R.id.refImage)
         status = findViewById(R.id.status)
@@ -112,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.defaultSoundBtn).setOnClickListener {
             stopPreview(); AlarmSound.setChoice(this, AlarmSound.PHONE); refresh()
         }
+        AlarmSound.init(this)
         val songRow = findViewById<LinearLayout>(R.id.songRow)
         songBtns = AlarmSound.BUILT_IN.mapIndexed { i, (id, _, name) ->
             id to toggleButton(name, songRow, i) { stopPreview(); AlarmSound.setChoice(this, id); refresh() }
@@ -146,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Opdateringer: tjek i baggrunden; knappen vises, hvis der ligger en nyere version
-        Updater.schedule(this)
+        if (BuildConfig.SELF_UPDATE) Updater.schedule(this)
         findViewById<Button>(R.id.updateBtn).setOnClickListener {
             if (!packageManager.canRequestPackageInstalls()) {
                 toast(getString(R.string.upd_need_permission))
@@ -267,7 +269,7 @@ class MainActivity : AppCompatActivity() {
     private fun refresh() {
         val latest = Prefs.latestTag(this)
         val updateBtn = findViewById<Button>(R.id.updateBtn)
-        val hasUpdate = latest.isNotEmpty() && Updater.isNewer(latest, Updater.installedVersion(this))
+        val hasUpdate = BuildConfig.SELF_UPDATE && latest.isNotEmpty() && Updater.isNewer(latest, Updater.installedVersion(this))
         updateBtn.visibility = if (hasUpdate) View.VISIBLE else View.GONE
         if (hasUpdate && updateBtn.isEnabled) updateBtn.text = getString(R.string.upd_button, latest.trimStart('v'))
 

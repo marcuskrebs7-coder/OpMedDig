@@ -15,11 +15,23 @@ import java.io.File
  *  - "phone": telefonens egen alarmtone
  */
 object AlarmSound {
-    /** Sange der følger med appen: valg-id → rå ressource og visningsnavn. */
-    val BUILT_IN = listOf(
-        Triple("good_morning", R.raw.song_good_morning, "Good morning"),
-        Triple("barbie_girl", R.raw.song_barbie_girl, "Barbie girl")
+    /** Mulige indbyggede sange: valg-id → ressourcenavn og visningsnavn. */
+    private val CANDIDATES = listOf(
+        Triple("good_morning", "song_good_morning", "Good morning"),
+        Triple("barbie_girl", "song_barbie_girl", "Barbie girl")   // kun i GitHub-udgaven
     )
+
+    /** Sange der faktisk følger med denne udgave: valg-id → rå ressource og visningsnavn. */
+    lateinit var BUILT_IN: List<Triple<String, Int, String>>
+        private set
+
+    fun init(c: Context) {
+        if (::BUILT_IN.isInitialized) return
+        BUILT_IN = CANDIDATES.mapNotNull { (id, res, name) ->
+            val rid = c.resources.getIdentifier(res, "raw", c.packageName)
+            if (rid != 0) Triple(id, rid, name) else null
+        }
+    }
     const val CUSTOM = "custom"
     const val PHONE = "phone"
 
@@ -31,7 +43,9 @@ object AlarmSound {
 
     /** Nuværende valg. Standard er den første indbyggede sang. */
     fun choice(c: Context): String {
+        init(c)
         val v = prefs(c).getString("soundChoice", null)
+            ?.takeIf { it == CUSTOM || it == PHONE || BUILT_IN.any { b -> b.first == it } }
         // Ældre version: havde man valgt en fil, bruges den stadig
         return v ?: if (hasCustom(c)) CUSTOM else BUILT_IN.first().first
     }

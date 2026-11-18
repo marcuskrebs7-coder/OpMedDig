@@ -33,6 +33,7 @@ class SetupActivity : AppCompatActivity() {
         val pad = dp(20)
         list = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(pad, dp(28), pad, pad) }
         setContentView(ScrollView(this).apply { setBackgroundColor(getColor(R.color.bg)); addView(list) })
+        applySystemBarInsets()
     }
 
     override fun onResume() {
@@ -63,7 +64,7 @@ class SetupActivity : AppCompatActivity() {
             button = R.string.setup_batt_btn
         ) { requestBatteryExemption() }
 
-        item(
+        if (BuildConfig.SELF_UPDATE) item(
             R.string.setup_upd_perm_t, R.string.setup_upd_perm_b,
             ok = packageManager.canRequestPackageInstalls(),
             button = R.string.setup_fs_btn
@@ -106,6 +107,11 @@ class SetupActivity : AppCompatActivity() {
 
     @SuppressLint("BatteryLife")
     private fun requestBatteryExemption() {
+        // Play-udgaven må ikke spørge direkte; den åbner listen, hvor man selv slår det fra
+        if (!BuildConfig.SELF_UPDATE) {
+            startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
+            return
+        }
         try {
             startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName")))
         } catch (e: Exception) {

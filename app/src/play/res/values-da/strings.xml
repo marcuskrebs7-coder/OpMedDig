@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Play-udgaven: opdateres via Google Play -->
+<resources>
+    <string name="setup_upd_t">Opdateringer</string>
+    <string name="setup_upd_b">Opdateringer kommer via Google Play. Lad automatiske opdateringer være slået til i Play Butik.</string>
+</resources>

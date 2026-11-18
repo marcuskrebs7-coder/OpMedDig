@@ -1,0 +1,15 @@
+<!-- Forgrund til det adaptive ikon: hvidt ur med visere og to "ringe-streger". Holdt inden for 66dp-sikkerhedszonen. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- urskive -->
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFF" android:strokeWidth="5"
+        android:pathData="M54,32a24,24 0 1,0 0.01,0z" />
+    <!-- visere -->
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFF" android:strokeWidth="5"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M54,42 L54,56 L63,62" />
+    <!-- ringe-streger -->
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFF" android:strokeWidth="4.5"
+        android:strokeLineCap="round" android:pathData="M30,34 L36,28 M78,34 L72,28" />
+</vector>

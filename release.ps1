@@ -18,9 +18,13 @@ $tag = "v$version"
 $existing = gh release list --json tagName --jq ".[].tagName"
 if ($existing -contains $tag) { throw "Release $tag findes allerede. Hæv versionName i app\build.gradle.kts først." }
 
-& C:\Android\gradle-8.7\bin\gradle.bat assembleRelease --no-daemon --console=plain -q
+# Bygger begge udgaver: GitHub-APK (selvopdatering) og Play-bundle (.aab til Google Play)
+& C:\Android\gradle-8.13\bin\gradle.bat assembleGithubRelease bundlePlayRelease --no-daemon --console=plain -q
 if ($LASTEXITCODE -ne 0) { throw "Bygning fejlede" }
-Copy-Item app\build\outputs\apk\release\app-release.apk .\OpMedDig.apk -Force
+Copy-Item app\build\outputs\apk\github\release\app-github-release.apk .\OpMedDig.apk -Force
+New-Item -ItemType Directory -Force Play-upload | Out-Null
+Copy-Item app\build\outputs\bundle\playRelease\app-play-release.aab ".\Play-upload\OpMedDig-$version.aab" -Force
+Write-Host "Play-fil: Play-upload\OpMedDig-$version.aab (uploades i Play Console)"
 
 # Navnet OpMedDig.apk skal være det samme hver gang; appen leder efter præcis det navn
 gh release create $tag OpMedDig.apk --title "Op Med Dig $version" --notes $Notes

@@ -7,4 +7,5 @@
     <color name="accent">#FF5A1F</color>
     <color name="alarm">#FF2D55</color>
     <color name="ok">#1AA35A</color>
+    <color name="icon_bg">#FF5A1F</color>
 </resources>

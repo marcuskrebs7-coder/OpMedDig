@@ -60,6 +60,7 @@ class RingActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
         setContentView(R.layout.activity_ring)
+        applySystemBarInsets(darkBars = true)
         taskArea = findViewById(R.id.taskArea)
         question = findViewById(R.id.question)
         error = findViewById(R.id.error)

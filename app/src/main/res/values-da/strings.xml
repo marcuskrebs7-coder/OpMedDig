@@ -114,4 +114,14 @@
     <!-- Ekstra vækning -->
     <string name="followup_title">STADIG VÅGEN? · Én sidste opgave</string>
     <string name="followup_toast">Godmorgen! Alarmen ringer én gang til om 15 minutter, med kun én opgave.</string>
+    <!-- Alarmlyd -->
+    <string name="label_sound">Alarmlyd</string>
+    <string name="btn_pick_sound">Vælg sang</string>
+    <string name="btn_preview_sound">Afspil</string>
+    <string name="btn_stop_sound">Stop</string>
+    <string name="btn_default_sound">Telefon</string>
+    <string name="sound_default">Telefonens alarmtone</string>
+    <string name="sound_bundled">Sangen der følger med appen</string>
+    <string name="sound_saved">Alarmlyden er gemt</string>
+    <string name="sound_bad">Den fil kan ikke afspilles. Prøv en MP3- eller M4A-fil.</string>
 </resources>

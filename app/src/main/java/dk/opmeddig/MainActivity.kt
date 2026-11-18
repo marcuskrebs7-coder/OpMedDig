@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var countBtns: Map<Int, Button>
     private lateinit var typeBtns: Map<ChallengeType, Button>
     private lateinit var langBtns: Map<String, Button>
+    private lateinit var songBtns: Map<String, Button>
 
     private val handler = Handler(Looper.getMainLooper())
     private val tick = object : Runnable {
@@ -53,6 +54,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private val askNotif = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+
+    private var preview: android.media.MediaPlayer? = null
+    private val pickSound = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) {
+            stopPreview()
+            val ok = try { AlarmSound.importFrom(this, uri) } catch (e: Exception) { false }
+            toast(getString(if (ok) R.string.sound_saved else R.string.sound_bad))
+            refresh()
+        }
+    }
+
+    private fun stopPreview() {
+        preview?.run { try { stop() } catch (_: Exception) {}; release() }
+        preview = null
+        findViewById<Button>(R.id.previewSoundBtn)?.text = getString(R.string.btn_preview_sound)
+    }
 
     override fun onCreate(s: Bundle?) {
         super.onCreate(s)
@@ -89,6 +106,27 @@ class MainActivity : AppCompatActivity() {
 
         PhotoMatch.loadRef(this)?.let { refImage.setImageBitmap(it) }
         findViewById<Button>(R.id.refBtn).setOnClickListener { takeRef.launch(null) }
+
+        // Alarmlyd
+        findViewById<Button>(R.id.pickSoundBtn).setOnClickListener { pickSound.launch(arrayOf("audio/*")) }
+        findViewById<Button>(R.id.defaultSoundBtn).setOnClickListener {
+            stopPreview(); AlarmSound.setChoice(this, AlarmSound.PHONE); refresh()
+        }
+        val songRow = findViewById<LinearLayout>(R.id.songRow)
+        songBtns = AlarmSound.BUILT_IN.mapIndexed { i, (id, _, name) ->
+            id to toggleButton(name, songRow, i) { stopPreview(); AlarmSound.setChoice(this, id); refresh() }
+        }.toMap()
+        findViewById<Button>(R.id.previewSoundBtn).setOnClickListener { b ->
+            if (preview != null) { stopPreview(); return@setOnClickListener }
+            preview = android.media.MediaPlayer().apply {
+                setAudioAttributes(AlarmSound.alarmAttributes())
+                AlarmSound.setSource(this@MainActivity, this)
+                prepare(); start()
+                setOnCompletionListener { stopPreview() }
+            }
+            (b as Button).text = getString(R.string.btn_stop_sound)
+            handler.postDelayed({ stopPreview() }, 15_000)
+        }
 
         findViewById<Button>(R.id.testBtn).setOnClickListener {
             if (ready()) {
@@ -138,7 +176,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        handler.removeCallbacks(tick)
+        stopPreview()
+        handler.removeCallbacksAndMessages(null)
         super.onPause()
     }
 
@@ -242,6 +281,11 @@ class MainActivity : AppCompatActivity() {
         langBtns.forEach { (tag, b) -> styleToggle(b, tag == lang, fg) }
 
         renderAlarms()
+
+        val choice = AlarmSound.choice(this)
+        findViewById<TextView>(R.id.soundName).text = "🎵 " + AlarmSound.label(this)
+        songBtns.forEach { (id, b) -> styleToggle(b, id == choice, fg) }
+        styleToggle(findViewById(R.id.defaultSoundBtn), choice == AlarmSound.PHONE, fg)
 
         val next = Scheduler.next(this)
         status.text = when {

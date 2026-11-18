@@ -74,18 +74,20 @@ class AlarmService : Service() {
         val am = getSystemService(AudioManager::class.java)
         am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), 0)
 
-        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+        // Egen sang hvis valgt, ellers telefonens alarmtone. Fejler egen lyd, bruges standardtonen.
         player = MediaPlayer().apply {
-            setAudioAttributes(
-                AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ALARM)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build()
-            )
-            setDataSource(this@AlarmService, uri)
+            setAudioAttributes(AlarmSound.alarmAttributes())
+            AlarmSound.setSource(this@AlarmService, this)
             isLooping = true
-            prepare()
+            try {
+                prepare()
+            } catch (e: Exception) {
+                reset()
+                setAudioAttributes(AlarmSound.alarmAttributes())
+                setDataSource(this@AlarmService, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
+                isLooping = true
+                prepare()
+            }
             setVolume(volume, volume)
             start()
         }

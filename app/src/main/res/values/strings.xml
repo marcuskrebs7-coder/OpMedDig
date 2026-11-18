@@ -116,4 +116,14 @@
     <!-- Follow-up alarm -->
     <string name="followup_title">STILL AWAKE? · One last task</string>
     <string name="followup_toast">Good morning! The alarm rings once more in 15 minutes, with just one task.</string>
+    <!-- Alarm sound -->
+    <string name="label_sound">Alarm sound</string>
+    <string name="btn_pick_sound">Choose song</string>
+    <string name="btn_preview_sound">Play</string>
+    <string name="btn_stop_sound">Stop</string>
+    <string name="btn_default_sound">Phone</string>
+    <string name="sound_default">The phone\'s alarm tone</string>
+    <string name="sound_bundled">The song that comes with the app</string>
+    <string name="sound_saved">Alarm sound saved</string>
+    <string name="sound_bad">That file can\'t be played. Try an MP3 or M4A file.</string>
 </resources>

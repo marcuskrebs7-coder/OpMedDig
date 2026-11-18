@@ -27,6 +27,14 @@ object Prefs {
     fun setPendingName(c: Context, v: String) = p(c).edit().putString("pendingName", v).apply()
     fun setCount(c: Context, v: Int) = p(c).edit().putInt("count", v).apply()
 
+    /** Ekstra vækning 15 min efter en slukket alarm: hvornår (0 = ingen). */
+    fun followUpAt(c: Context) = p(c).getLong("followUpAt", 0L)
+    fun setFollowUpAt(c: Context, v: Long) = p(c).edit().putLong("followUpAt", v).commit()
+
+    /** Er den planlagte systemalarm den ekstra vækning? */
+    fun nextIsFollowUp(c: Context) = p(c).getBoolean("nextIsFollowUp", false)
+    fun setNextIsFollowUp(c: Context, v: Boolean) = p(c).edit().putBoolean("nextIsFollowUp", v).commit()
+
     /** Opgavetyper som bitmaske (se ChallengeType). Standard: alle. */
     fun challenges(c: Context) = p(c).getInt("challenges", ChallengeType.ALL)
     fun setChallenges(c: Context, v: Int) = p(c).edit().putInt("challenges", v).apply()

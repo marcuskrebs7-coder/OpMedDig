@@ -83,7 +83,7 @@
     <string name="setup_test_t">Do a test</string>
     <string name="setup_test_b">Tap \"Test the alarm in 1 minute\", lock the phone and wait. Check that it rings and that the photo is accepted.</string>
     <string name="setup_nosnooze_t">No snooze, no shortcut</string>
-    <string name="setup_nosnooze_b">The alarm only stops when the tasks are done and the photo is accepted. After the tasks the volume drops to 50 %. The back button and volume buttons do nothing on the alarm screen. Locking the phone is fine. Turning the phone off or uninstalling the app will of course stop it.</string>
+    <string name="setup_nosnooze_b">The alarm only stops when the tasks are done and the photo is accepted. After the tasks the volume drops to 50 %. 15 minutes later it rings once more, and then only one task is needed. The back button and volume buttons do nothing on the alarm screen. Locking the phone is fine. Turning the phone off or uninstalling the app will of course stop it.</string>
     <string name="setup_upd_t">Updates</string>
     <string name="setup_upd_b">The app is not from the Play Store. Play Protect may warn you during install, choose \"Install anyway\". New versions are installed manually on top of the old one.</string>
     <string name="setup_upd_perm_t">Allow automatic updates</string>
@@ -113,4 +113,7 @@
     <string name="days_all">Every day</string>
     <string name="days_weekdays">Weekdays</string>
     <string name="days_weekend">Weekend</string>
+    <!-- Follow-up alarm -->
+    <string name="followup_title">STILL AWAKE? · One last task</string>
+    <string name="followup_toast">Good morning! The alarm rings once more in 15 minutes, with just one task.</string>
 </resources>

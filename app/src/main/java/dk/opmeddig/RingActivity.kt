@@ -35,6 +35,8 @@ class RingActivity : AppCompatActivity() {
     private var solved = 0
     private var photoPhase = false
     private var plan: List<ChallengeType> = emptyList()
+    /** Ekstra vækning 15 min efter: kun én opgave og intet billede. */
+    private var followUp = false
 
     private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bmp ->
         val ref = PhotoMatch.loadRef(this)
@@ -95,6 +97,8 @@ class RingActivity : AppCompatActivity() {
             photoPhase = s.getBoolean("photoPhase")
             plan = s.getIntArray("plan")?.map { ChallengeType.values()[it] } ?: emptyList()
         }
+        followUp = s?.getBoolean("followUp") ?: Prefs.nextIsFollowUp(this)
+        if (followUp) findViewById<TextView>(R.id.wakeTitle).text = getString(R.string.followup_title)
         if (plan.isEmpty()) plan = makePlan()
         if (photoPhase) startPhotoPhase() else showTask()
     }
@@ -108,6 +112,7 @@ class RingActivity : AppCompatActivity() {
         super.onSaveInstanceState(out)
         out.putInt("solved", solved)
         out.putBoolean("photoPhase", photoPhase)
+        out.putBoolean("followUp", followUp)
         out.putIntArray("plan", plan.map { it.ordinal }.toIntArray())
     }
 
@@ -122,7 +127,7 @@ class RingActivity : AppCompatActivity() {
     private fun makePlan(): List<ChallengeType> {
         val types = ChallengeType.from(Prefs.challenges(this))
         val out = mutableListOf<ChallengeType>()
-        repeat(Prefs.count(this)) {
+        repeat(if (followUp) 1 else Prefs.count(this)) {
             val options = if (types.size > 1) types.filter { it != out.lastOrNull() } else types
             out += options.random()
         }
@@ -157,7 +162,11 @@ class RingActivity : AppCompatActivity() {
             Challenges.build(plan[solved], this,
                 onDone = {
                     solved++
-                    if (solved >= total()) startPhotoPhase() else showTask()
+                    when {
+                        solved < total() -> showTask()
+                        followUp -> finishAlarm()
+                        else -> startPhotoPhase()
+                    }
                 },
                 onWrong = { msg -> error.text = msg }
             )
@@ -179,8 +188,10 @@ class RingActivity : AppCompatActivity() {
 
     private fun finishAlarm() {
         startService(Intent(this, AlarmService::class.java).setAction(AlarmService.ACTION_STOP))
+        // Første slukning: ring igen om 15 min. Den ekstra vækning planlægger ikke flere.
+        Prefs.setFollowUpAt(this, if (followUp) 0L else System.currentTimeMillis() + Scheduler.FOLLOW_UP_MS)
         Scheduler.scheduleNext(this)
-        Toast.makeText(this, getString(R.string.good_morning), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(if (followUp) R.string.good_morning else R.string.followup_toast), Toast.LENGTH_LONG).show()
         finish()
     }
 }

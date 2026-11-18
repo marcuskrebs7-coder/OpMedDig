@@ -28,8 +28,9 @@ object Scheduler {
     }
 
     /** setAlarmClock ringer præcist, også i dvaletilstand, og viser alarm-ikonet i statuslinjen. */
-    fun scheduleAt(c: Context, millis: Long, name: String) {
+    fun scheduleAt(c: Context, millis: Long, name: String, followUp: Boolean = false) {
         Prefs.setPendingName(c, name)
+        Prefs.setNextIsFollowUp(c, followUp)
         val am = c.getSystemService(AlarmManager::class.java)
         val show = PendingIntent.getActivity(
             c, 2, Intent(c, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE
@@ -37,10 +38,19 @@ object Scheduler {
         am.setAlarmClock(AlarmManager.AlarmClockInfo(millis, show), pending(c))
     }
 
+    /** Planlæg det der kommer først: en ventende ekstra vækning eller den næste almindelige alarm. */
     fun scheduleNext(c: Context) {
         val n = next(c)
-        if (n == null) cancel(c) else scheduleAt(c, n.second, n.first.name)
+        val f = Prefs.followUpAt(c)
+        when {
+            f > System.currentTimeMillis() && (n == null || f <= n.second) ->
+                scheduleAt(c, f, Prefs.pendingName(c), followUp = true)
+            n == null -> { Prefs.setNextIsFollowUp(c, false); cancel(c) }
+            else -> scheduleAt(c, n.second, n.first.name)
+        }
     }
+
+    const val FOLLOW_UP_MS = 15 * 60_000L
 
     fun cancel(c: Context) = c.getSystemService(AlarmManager::class.java).cancel(pending(c))
 }

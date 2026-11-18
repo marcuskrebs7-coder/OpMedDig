@@ -81,7 +81,7 @@
     <string name="setup_test_t">Lav en test</string>
     <string name="setup_test_b">Tryk \"Test alarmen om 1 minut\", lås telefonen og vent. Tjek at den ringer, og at billedet bliver godkendt.</string>
     <string name="setup_nosnooze_t">Ingen snooze, ingen genvej</string>
-    <string name="setup_nosnooze_b">Alarmen stopper kun, når opgaverne er klaret og billedet er godkendt. Efter opgaverne falder lyden til 50 %. Tilbage-knappen og lydknapperne virker ikke på alarmskærmen. Det er fint at låse telefonen. Slukker man telefonen eller afinstallerer appen, stopper alarmen selvfølgelig.</string>
+    <string name="setup_nosnooze_b">Alarmen stopper kun, når opgaverne er klaret og billedet er godkendt. Efter opgaverne falder lyden til 50 %. 15 minutter efter ringer den én gang til, og så skal der kun løses én opgave. Tilbage-knappen og lydknapperne virker ikke på alarmskærmen. Det er fint at låse telefonen. Slukker man telefonen eller afinstallerer appen, stopper alarmen selvfølgelig.</string>
     <string name="setup_upd_t">Opdateringer</string>
     <string name="setup_upd_b">Appen kommer ikke fra Play Butik. Play Protect kan advare ved installation, vælg \"Installer alligevel\". Nye versioner installeres manuelt oven på den gamle.</string>
     <string name="setup_upd_perm_t">Tillad automatiske opdateringer</string>
@@ -111,4 +111,7 @@
     <string name="days_all">Hver dag</string>
     <string name="days_weekdays">Hverdage</string>
     <string name="days_weekend">Weekend</string>
+    <!-- Ekstra vækning -->
+    <string name="followup_title">STADIG VÅGEN? · Én sidste opgave</string>
+    <string name="followup_toast">Godmorgen! Alarmen ringer én gang til om 15 minutter, med kun én opgave.</string>
 </resources>
